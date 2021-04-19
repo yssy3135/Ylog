@@ -1,16 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const { User } = require("../models/User");
+const { auth } = require("../middleware/auth")
 
 
 
 
 
-router.get("/auth", (req,res) => {
+router.get("/auth",auth, (req,res) => {
     res.status(200).json({
-        _id = req.user._id,
-        name = req.user.name,
-        id = req.user.id,
+        _id : req.user._id,
+        name : req.user.name,
+        id : req.user.id,
         email : req.user.email,
         isAdmin : req.user.role === 0 ? false:true,
         role : req.user.rol,
@@ -37,12 +38,13 @@ router.post("/register", (req, res) => {
 
 
 
-router.get("/login", (req,res) => {
+router.post("/login", (req,res) => {
    
 
-    console.log(req.body)
+    console.log(req.body.user)
     User.findOne({id : req.body.id} ,(err,user)=>{
         if(!user){
+            
             return res.json({
                 loginSuccess: false,
                 massage: "로그인 실패"
@@ -61,7 +63,7 @@ router.get("/login", (req,res) => {
                     .cookie("w_auth",user.token)
                     .status(200)
                     .json({
-                        loginSuccess:true,usertoken:user._token
+                        loginSuccess:true,userId:user._id
                     })
 
             })
@@ -71,7 +73,21 @@ router.get("/login", (req,res) => {
 
     })
 
-}) 
+})
+
+router.post("/logout",auth ,(req,res) => {
+    User.findOneAndUpdate({ _id : req.user._id} , {token: "",tokenExp:"" } ,(err,doc) => {
+        console.log("들어옴")
+        if(err) res.json({success: false,err})
+        console.log("성공")
+        
+        return res.status(200).send({
+            success:true
+        })
+    });
+
+
+});
 
 
 

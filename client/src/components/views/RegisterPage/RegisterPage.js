@@ -1,11 +1,16 @@
 import React from 'react'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { registerUser } from "../../../_actions/user_actinos";
+import { useDispatch } from "react-redux";
 import {
     Form,
     Input,
     Button,
+    Typography
   } from 'antd';
+
+const { Title } = Typography;
 
 const formItemLayout = {
 labelCol: {
@@ -31,6 +36,7 @@ wrapperCol: {
 };
 
 function RegisterPage(props) {
+    const dispatch = useDispatch();
     return (
         <Formik
             initialValues = {{
@@ -57,6 +63,32 @@ function RegisterPage(props) {
                 .oneOf([Yup.ref('password'),null],'비밀번호가 일치하지 않습니다')
                 .required('비밀번호 확인란을 입력해주세요')
             })}
+
+            onSubmit = {(values, { setSubmitting }) =>{
+                console.log("서브밋")
+                setTimeout(() => {
+                    let dataToSubmit = {
+                        name : values.name,
+                        id : values.id,
+                        email : values.email,
+                        phone : values.phone,
+                        password : values.password,
+                    };
+
+                    dispatch(registerUser(dataToSubmit)).then(response => {
+                        if(response.payload.success){
+                            props.history.push("/login")
+                        }else{
+                            alert(response.payload.err.errmsg)
+                        }
+                    })
+
+                    setSubmitting(false);
+
+                },500);
+            }}
+
+
         >
             {props => {
                 const {
@@ -69,13 +101,13 @@ function RegisterPage(props) {
                     handleBlur,
                     handleSubmit,
                     handleReset,
-                  } = props;
+                } = props;
                   return (
-                    <div className="app"   >
-                        <h2>회원 가입</h2>
+                    <div className="app" style={{width: '100%', backgroundColor: 'skyblue' ,display : 'flex', justifyContent:'center', paddingTop : '1.5%'}}>
+                        <Title level={1}>회원가입</Title>
                         <br/>
                         <br/>
-                        <div style={{ width: '100%', backgroundColor: 'skyblue' ,display : 'flex', justifyContent:'center', paddingTop : '1.5%'}}>
+                    
                             <Form style={{ maxWidth: '375px',   width: '100%', backgroundColor: 'skyblue' }} onSubmit={handleSubmit} >
 
                                 <Form.Item required label="Name">
@@ -95,20 +127,20 @@ function RegisterPage(props) {
                                     )}
                                 </Form.Item>
 
-                                <Form.Item required label="ID">
+                                <Form.Item required label="id">
                                     <Input
-                                    id="ID"
+                                    id="id"
                                     placeholder="Enter your ID"
                                     type="text"
-                                    value={values.lastName}
+                                    value={values.id}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     className={
-                                        errors.lastName && touched.lastName ? 'text-input error' : 'text-input'
+                                        errors.id && touched.id ? 'text-input error' : 'text-input'
                                     }
                                     />
-                                    {errors.lastName && touched.lastName && (
-                                    <div className="input-feedback">{errors.lastName}</div>
+                                    {errors.id && touched.id && (
+                                    <div className="input-feedback">{errors.id}</div>
                                     )}
                                 </Form.Item>
 
@@ -188,9 +220,9 @@ function RegisterPage(props) {
                                 </Form.Item>
                             </Form>
                         </div>
-                    </div>
+                  
                   );
-            }}
+                }}
 
 
         </Formik>

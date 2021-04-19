@@ -4,7 +4,10 @@
   "description": "node react blog",
   "main": "index.js",
   "scripts": {
-    "backend": "nodemon server/index.js"
+    "start": "node server/index.js",
+    "backend": "nodemon server/index.js",
+    "frontend": "npm run start --prefix client",
+    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
   },
   "author": "",
   "license": "ISC",
@@ -15,7 +18,7 @@
     "cors": "^2.8.5",
     "debug": "^4.1.1",
     "express": "^4.17.1",
-    "http-proxy-middleware": "^1.1.1",
+    "http-proxy-middleware": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
     "mongoose": "^5.4.20",
