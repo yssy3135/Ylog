@@ -7,6 +7,7 @@ const { auth } = require("../middleware/auth")
 
 
 
+
 router.get("/auth",auth, (req,res) => {
     res.status(200).json({
         _id : req.user._id,
@@ -14,6 +15,7 @@ router.get("/auth",auth, (req,res) => {
         id : req.user.id,
         email : req.user.email,
         isAdmin : req.user.role === 0 ? false:true,
+        isAuth: true,
         role : req.user.rol,
     })
 })
@@ -76,11 +78,9 @@ router.post("/login", (req,res) => {
 })
 
 router.post("/logout",auth ,(req,res) => {
-    User.findOneAndUpdate({ _id : req.user._id} , {token: "",tokenExp:"" } ,(err,doc) => {
-        console.log("들어옴")
-        if(err) res.json({success: false,err})
-        console.log("성공")
+    User.findOneAndUpdate({ _id : req.user._id} , {token: "", tokenExp : ""} ,(err,doc) => {
         
+        if(err) res.json({success: false,err})
         return res.status(200).send({
             success:true
         })
@@ -88,6 +88,9 @@ router.post("/logout",auth ,(req,res) => {
 
 
 });
+
+
+
 
 
 

@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
+    "@toast-ui/editor": "^2.5.2",
     "antd": "^3.26.20",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",

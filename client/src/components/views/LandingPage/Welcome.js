@@ -2,22 +2,20 @@ import React from 'react'
 import { Layout ,Button } from 'antd';
 import { useSelector,useDispatch } from "react-redux";
 import { logoutUser } from '../../../_actions/user_actinos';
-
+import {LanderPage} from '../BlogPage/LanderPage'
 const { Header,Content } = Layout;
 
 function Welcome(props) {
     const user = useSelector(state => state.user)
     const dispatch = useDispatch();
-    
-    console.log(user)
-
-
+   
 
     const logoutHandler = () => {
         let dataToSubmit = user.userData
         dispatch(logoutUser(dataToSubmit)).then(response => {
             if(response.payload.success){
-                props.history.push("/");
+              
+                window.location.replace("/")
             }else{
                 alert(response.payload.err);
             }
@@ -26,7 +24,7 @@ function Welcome(props) {
     
 
 
-    if(user.userData && user.userData._id){
+    if(user.userData && user.userData.isAuth ){
 
         return (
 
@@ -42,7 +40,10 @@ function Welcome(props) {
                     </Content>
                     <div
                         style={{ height: '30%',display :'flex', alignItems:'center', justifyContent:'center' }}>
-                        <Button type='primary' style={{  marginRight : '5%', width : '20%', height : '20%'}} onClick={()=>{ props.history.push("/login"); }}  >
+                        <Button onClick = {() => { props.history.push(`/blog/${user.userData._id}`)}}
+                            type='primary' 
+                            style={{  marginRight : '5%', width : '20%', height : '20%'}} 
+                        >
                             {user.userData.id}님 환영합니다 (블로그로 이동)
                         </Button>
                         <Button type='primary' style = {{  width : '20%', height : '20%'}} 
