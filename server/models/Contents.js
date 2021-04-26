@@ -5,7 +5,7 @@
  const contentsSchema = mongoose.Schema({
     writer : {
         type : Schema.Types.ObjectId,
-        ref:'User'
+        ref:'blogUser'
     },
     title: {
         type : String,
@@ -25,17 +25,6 @@
 
 
  },{timestamps: true})
-
- contentsSchema.index({
-    title:'text',
-    contents:'text',
-
-},{
-    weights:{
-        title: 5,
-        contents: 1
-    }
-})
 
 const Contents = mongoose.model('blogContents', contentsSchema);
 module.exports = { Contents }

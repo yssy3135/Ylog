@@ -1,31 +1,25 @@
 import React,{useEffect,useState} from 'react';
 
-import { Icon,Layout, Menu,Col,Card,Row, Button} from 'antd';
-import Sidebar from '../SideBar/sidebar'
-import {
-  AppstoreOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  ShopOutlined,
-  TeamOutlined,
-  UserOutlined,
-  UploadOutlined,
-  VideoCameraOutlined,
-} from '@ant-design/icons';
+import { Layout,Col,Card,Row, Button ,} from 'antd';
+import Sidebar from '../SideBar/Sidebar'
+import ImageSlider from '../../utils/ImageSlider'
+import Meta from 'antd/lib/card/Meta'
 import Axios from 'axios';
 
 
-const { Header, Content, Footer, Sider } = Layout;
+
+const { Header, Content } = Layout;
 
 
 
 function LanderPage(props) {
     const userId = props.match.params.userId;
-
+    
 
     const [Skip, setSkip] = useState(0);
     const [Limit, setLimit] = useState(8);
-    const [Contents, setContents] = useState("");
+    const [Contents, setContents] = useState([]);
+    const [PostSize, setPostSize] = useState(0);
 
     useEffect(() => {
         
@@ -34,22 +28,24 @@ function LanderPage(props) {
             limit : Limit
         }
 
-        getContents(body);
+        getContents();
 
 
     }, [])
 
 
-    const getContents = (body) => {
-        Axios.post('api/contents/content')
+    const getContents = () => {
+        Axios.get('/api/contents/content')
         .then(response => {
             if(response.data.success){
-                if(body.loadMore){
-                    setContents([...Contents,...response.data.contentInfo])
-                }else{
-                    setContents(response.data.contentInfo)
-                }
-
+                setContents([...Contents,...response.data.contentsInfo])
+                // if(body.loadMore){
+                //     console.log(Contents)
+                // }else{
+                //     console.log(response.data)
+                //     setContents(response.data.contentInfo)
+                // }
+                
                 setSkip(Skip + Limit);
                 setPostSize(response.data.postSize);
 
@@ -62,12 +58,32 @@ function LanderPage(props) {
     }
 
 
+    const renderCards = Contents.map((content,index) => {
+   
+
+
+        return <Col lg={5} md={7} xs={20}>
+        
+                
+                <Card
+                    key= {index}
+                    cover ={<a><ImageSlider images= {content.images}/> </a>}
+                    >
+                        <Meta
+                            title={content.title}
+                        />
+                </Card>
+            </Col> 
+
+    })
+
+
 
 
 
     return (
         <Layout  style={{ height: '100vh'   }} >
-            <Sidebar></Sidebar>
+            <Sidebar userData = {userId}></Sidebar>
 
             <Layout className="site-layout" style = {{ marginLeft: 200 ,backgroundColor : '#40a9ffa8' }}> 
              
@@ -94,16 +110,15 @@ function LanderPage(props) {
                             <Button onClick = { () => { props.history.push('/write')}} >글쓰기</Button>
                         </div>
 
-                        <Col lg={6} md={8} xs={24}>
-            
-            
-                            <Card
-                                cover ={<a href > </a>}
-                                >
-                                  
-                            </Card>
-                        </Col> 
+
+                        <Row gutter ={[16,16]}>
+                            {renderCards}
+                        </Row>
+
                     </div>
+
+                    
+
                 </Content>
 
             

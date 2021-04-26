@@ -26,6 +26,7 @@ app.use(bodyParser.json());
 
 app.use('/api/users', require('./routes/users'));
 app.use('/api/contents',require('./routes/contents'))
+app.use('/api/categorys',require('./routes/categorys'))
 
 app.use('/uploads', express.static('uploads'));
 

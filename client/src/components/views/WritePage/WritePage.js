@@ -24,7 +24,7 @@ function WritePage(props) {
     }
     
     
-    if(document.getElementById("editor") && document.getElementById("editor").childElementCount == 0){
+    if(document.getElementById("editor") && document.getElementById("editor").childElementCount === 0){
             let formData = new FormData();
 
             const config = {

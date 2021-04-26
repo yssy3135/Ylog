@@ -30,15 +30,13 @@ router.post('/image',(req,res) => {
 })
 
 
-
 router.post("/write",(req,res) => {
-    console.log("롸이트")
+   
     const content = new Contents(req.body);
-
-    console.log(content)
 
     content.save((err,doc) => {
         if(err) {
+            
             console.log(err)
             return res.status(200).json({success:false,err})
         }
@@ -47,7 +45,32 @@ router.post("/write",(req,res) => {
 
 });
 
+router.get("/content",(req,res) => {
+    let limit = req.body.limit ? parseInt(req.body.limit) : 20;
+    let skip = req.body.skip ? parseInt(req.body.skip) :0;
+   
 
+    Contents.find()
+    .populate("writer")
+    .skip(skip)
+    .limit(limit)
+    .exec((err,contentsInfo) => {
+        if(err) {
+          
+            return res.status(400).json({success: false, err})
+        }
+       
+
+        return res.status(200).json({
+            success : true,
+            contentsInfo,
+            postSize : contentsInfo.length
+        })
+    })
+
+
+
+})
 
 
 module.exports = router;
