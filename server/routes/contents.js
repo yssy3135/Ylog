@@ -33,6 +33,7 @@ router.post('/image',(req,res) => {
 router.post("/write",(req,res) => {
    
     const content = new Contents(req.body);
+    console.log(req.body)
 
     content.save((err,doc) => {
         if(err) {
@@ -45,32 +46,76 @@ router.post("/write",(req,res) => {
 
 });
 
-router.get("/content",(req,res) => {
+router.post("/content",(req,res) => {
     let limit = req.body.limit ? parseInt(req.body.limit) : 20;
     let skip = req.body.skip ? parseInt(req.body.skip) :0;
    
 
-    Contents.find()
-    .populate("writer")
-    .skip(skip)
-    .limit(limit)
-    .exec((err,contentsInfo) => {
-        if(err) {
-          
-            return res.status(400).json({success: false, err})
+    if(req.body.category){
+  
+        let form = {
+            $and : [req.body]
         }
-       
-
-        return res.status(200).json({
-            success : true,
-            contentsInfo,
-            postSize : contentsInfo.length
+        Contents.find(form)
+        .populate("writer")
+        .populate("category")
+        .skip(skip)
+        .limit(limit)
+        .exec((err,contentsInfo) => {
+            if(err) {
+              
+                return res.status(400).json({success: false, err})
+            }
+            return res.status(200).json({
+                success : true,
+                contentsInfo,
+                postSize : contentsInfo.length
+            })
         })
-    })
 
+    }else{
+        Contents.find()
+        .where('writer').equals(req.body.writer)
+        .populate("writer")
+        .populate("category")
+        .skip(skip)
+        .limit(limit)
+        .exec((err,contentsInfo) => {
+            if(err) {        
+                return res.status(400).json({success: false, err})
+            }
+            return res.status(200).json({
+                success : true,
+                contentsInfo,
+                postSize : contentsInfo.length
+            })
+        })
 
+    }
 
 })
 
+
+router.post("/detail",(req,res) => {
+        console.log(req.body.contentId)
+    
+        Contents.find()
+        .where('_id').equals(req.body.contentId)
+        .populate("writer")
+        .populate("category")
+        .exec((err,contentsInfo) => {
+            if(err) {        
+                return res.status(400).json({success: false, err})
+            }
+            return res.status(200).json({
+                success : true,
+                contentsInfo,
+                postSize : contentsInfo.length
+            })
+        })
+
+    
+
+})
 
 module.exports = router;

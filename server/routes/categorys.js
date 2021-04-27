@@ -18,7 +18,7 @@ router.post("/",(req,res) => {
         .where('id')
         .equals(req.body.id)
         .exec((err,categoryNames) => {
-            console.log(categoryNames)
+         
     
             if(err) return res.status(400).json({success: false, err})
     
@@ -35,13 +35,11 @@ router.post("/",(req,res) => {
 
 router.post("/category",(req,res) => {
    
-    console.log(req.body)
+    
     Category.find()
     .where('id')
     .equals(req.body.id)
     .exec((err,categoryNames) => {
-        console.log(categoryNames)
-
         if(err) return res.status(400).json({success: false, err})
 
         return res.status(200).json({

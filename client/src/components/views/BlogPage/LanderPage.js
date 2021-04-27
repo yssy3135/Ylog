@@ -20,6 +20,7 @@ function LanderPage(props) {
     const [Limit, setLimit] = useState(8);
     const [Contents, setContents] = useState([]);
     const [PostSize, setPostSize] = useState(0);
+    const [Category, setCategory] = useState("");
 
     useEffect(() => {
         
@@ -31,14 +32,19 @@ function LanderPage(props) {
         getContents();
 
 
-    }, [])
+    }, [Category])
 
 
     const getContents = () => {
-        Axios.get('/api/contents/content')
+        console.log(Category)
+        let body = {
+            writer : userId,
+            category : Category
+        }
+        Axios.post('/api/contents/content',body)
         .then(response => {
             if(response.data.success){
-                setContents([...Contents,...response.data.contentsInfo])
+                setContents([...response.data.contentsInfo])
                 // if(body.loadMore){
                 //     console.log(Contents)
                 // }else{
@@ -60,30 +66,31 @@ function LanderPage(props) {
 
     const renderCards = Contents.map((content,index) => {
    
-
-
-        return <Col lg={5} md={7} xs={20}>
-        
-                
-                <Card
-                    key= {index}
-                    cover ={<a><ImageSlider images= {content.images}/> </a>}
-                    >
-                        <Meta
-                            title={content.title}
-                        />
-                </Card>
+        return <Col key= {index} lg={5} md={7} xs={20}>
+                <a href = {`/blog/${userId}/${content._id}`}>
+                    <Card
+                        hoverable
+                        cover ={<ImageSlider images= {content.images}/>}
+                        >
+                            <Meta
+                                title={content.title}
+                            />
+                    </Card>
+                </a>
             </Col> 
 
     })
 
-
+    const handleCategory = (selected) => {
+        setCategory(selected)
+    }
+    
 
 
 
     return (
         <Layout  style={{ height: '100vh'   }} >
-            <Sidebar userData = {userId}></Sidebar>
+            <Sidebar userData = {userId} handleCategory = {selected => handleCategory(selected)} ></Sidebar>
 
             <Layout className="site-layout" style = {{ marginLeft: 200 ,backgroundColor : '#40a9ffa8' }}> 
              

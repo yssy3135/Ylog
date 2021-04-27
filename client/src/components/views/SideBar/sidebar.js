@@ -1,6 +1,6 @@
 import React ,{useState , useEffect}from 'react'
 
-import { Icon,Layout, Menu,Modal,Input } from 'antd';
+import { Icon,Layout, Menu,Modal,Input, Button } from 'antd';
 import Axios from 'axios'
 import "../SideBar/sidebar.css"
 
@@ -89,17 +89,25 @@ function Sidebar(props) {
     const categoryChangeHandler = (event) => {
         setCategory(event.currentTarget.value);
     }
-
-
+    
+    
     const showCategory = categoryNames.map((name,index) => {
-      
-        return   <Menu.Item key={index+1} icon={<UserOutlined />}>
+        
+        return   <Menu.Item value={name._id} key={index+1} icon={<UserOutlined />}>
                     <RightOutlined />
                     {name.category}
                 </Menu.Item>
                
-    }) 
+            }) 
+            
+    const selectedHandler = (event) => {
 
+        props.handleCategory(event.item.props.value);
+    }
+
+    const totalHandler = () => {
+        props.handleCategory();
+    }
 
     return (
     
@@ -135,9 +143,13 @@ function Sidebar(props) {
                 </Modal>
 
 
-                <Menu theme="" mode="inline" defaultSelectedKeys={['0']}  >
+                <Menu onClick={selectedHandler}  mode="inline" defaultSelectedKeys={['0']}  >
                      {showCategory}
                 </Menu>
+
+                <div style = {{display:'flex' ,alignItems:'center' ,justifyContent:'center'}}>
+                    <Button onClick={totalHandler} >전체보기</Button>
+                </div>
             </Sider>
     
     )

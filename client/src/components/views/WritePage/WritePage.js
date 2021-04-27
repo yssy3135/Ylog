@@ -1,5 +1,5 @@
-import React,{useState} from 'react'
-import { useSelector } from "react-redux";
+import React,{useState ,useEffect} from 'react'
+import { useSelector,  } from "react-redux";
 import Editor from '@toast-ui/editor';
 import { Input ,Button,Select} from 'antd';
 import axios from 'axios';
@@ -11,15 +11,56 @@ const { Option } = Select;
 
 function WritePage(props) {
   
-    const user = useSelector(state => state.user);
-
+    
     const [Title, setTitle] = useState("");
     const [Images, setImages] = useState([]);
-   
+    const [Category, setCategory] = useState([]);
+    const user = useSelector(state => state.user);
+    const [categoryValue, setcategoryValue] = useState("");
     
+    useEffect( () => {
+     
+        if(user.userData){
+            getCategory();
+        }
+        
+        
+    },[user])
+  
+
+    const  getCategory = () => {
+       console.log(user)
+
+        let  body = {
+            id : user.userData._id
+        }
+
+         
+        axios.post('/api/categorys/category',body)
+        .then( response => {
+            if(response.data.success){
+               setCategory(response.data.categoryNames); 
+
+            }else{
+                alert('카테고리 목록을 불러오는데 실패하였습니다.')
+            }
+        });
+    }
+        
+    const handleChange = (value) => {
+        setcategoryValue(value);
+    }
+
     
+    const showCategory = Category.map((categorys,index) => {
+        return  <Option key = {index} value= {categorys._id}> {categorys.category}</Option>
+               
+    }) 
+
+
     const titleChangeHandler = (event) =>{
         setTitle(event.currentTarget.value);
+        
         
     }
     
@@ -46,9 +87,10 @@ function WritePage(props) {
                     axios.post("/api/contents/image",formData,config)
                     .then(response => {
                         if(response.data.success){
-
+                            console.log(response.data.filePath)
                             setImages([...Images,response.data.filePath])
-                            callback(`http://localhost:5000/${response.data.filePath}`,"alt text");
+                            let replaced = response.data.filePath.replace("\\","/");
+                            callback(`http://localhost:5000/${replaced}`,"alt text");
 
                         }else{
                             alert('파일을 저장하는데 실패했습니다.')
@@ -68,9 +110,7 @@ function WritePage(props) {
       
 
         let content = editor.getHtml();
-        
-
-        if(!Title || !content){
+        if(!Title || !content || !categoryValue){
             return alert("모든 값을 작성해야합니다.")
         }
 
@@ -78,7 +118,9 @@ function WritePage(props) {
             writer : props.user.userData._id,
             title : Title,
             contents : content,
-            images : Images
+            images : Images,
+            category : categoryValue
+           
         }
 
         axios.post('/api/contents/write',contents)
@@ -97,6 +139,7 @@ function WritePage(props) {
 
     }
 
+
       
 
 
@@ -108,8 +151,8 @@ function WritePage(props) {
                   
                     <div style={{display:'flex' ,flexDirection:'column'}}>
                 
-                    <Select style={{width :'150px' ,marginBottom :'10px'}}>
-                        <Option value="카테고리를 선택해주세요">카테고리를 선택해주세요</Option>
+                    <Select onChange = {handleChange}  style={{width :'150px' ,marginBottom :'10px'}}>
+                        {showCategory}
                     </Select>
                   
 
