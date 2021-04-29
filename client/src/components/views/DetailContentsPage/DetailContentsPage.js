@@ -60,10 +60,21 @@ function DetailContentsPage(props) {
         });
     }
 
+    const deleteHandler = () => {
+        let body = {
+            contentId : contentId
+        }
 
+        axios.post('/api/contents/delete',body)
+        .then(response => {
+            if(response.data.success){
+                props.history.push(`/blog/${userId}`)
+            }else{
+                alert("게시글 삭제를 실패했습니다.")
+            }
+        })
+    }
 
-
-    
 
     return (
         <div>
@@ -112,7 +123,7 @@ function DetailContentsPage(props) {
                 </div>
                 <div style= {{paddingTop:'20px'}}>      
                     <Button onClick = {listHandler}style= {{marginRight:'10px'}}>목록</Button>
-                    <Button style= {{marginLeft:'10px'}}>수정</Button>
+                    <Button onClick = {deleteHandler} style= {{marginLeft:'10px'}}>삭제</Button>
                 </div>
             </div>
 

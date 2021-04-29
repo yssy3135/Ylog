@@ -33,7 +33,7 @@ router.post('/image',(req,res) => {
 router.post("/write",(req,res) => {
    
     const content = new Contents(req.body);
-    console.log(req.body)
+   
 
     content.save((err,doc) => {
         if(err) {
@@ -117,5 +117,61 @@ router.post("/detail",(req,res) => {
     
 
 })
+
+
+router.post("/edit",(req,res) => {
+
+    let body = req.body
+    console.log(body.contentsId)
+    Contents.findOneAndUpdate(
+        {_id : body.contentsId},
+        {
+           title : body.title,
+            contents: body.contents,
+            textcontents: body.textcontents,
+            images : body.images
+            
+        },
+        { new : true },
+        (err,doc) => {
+            if(err) {        
+                return res.status(400).json({success: false, err})
+            }
+          
+            return res.status(200).json({
+                success : true,
+            })
+        }
+    
+    ) 
+
+  
+
+})
+
+
+router.post("/delete",(req,res) => {
+
+    let body = req.body
+    console.log(body)
+    Contents.findOneAndDelete(
+        {_id : body.contentId},
+        (err,doc) => {
+            if(err) {        
+                return res.status(400).json({success: false, err})
+            }
+          
+            return res.status(200).json({
+                success : true,
+            })
+        }
+    
+    ) 
+
+  
+
+})
+
+
 
 module.exports = router;

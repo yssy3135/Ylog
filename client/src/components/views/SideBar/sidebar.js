@@ -106,6 +106,7 @@ function Sidebar(props) {
     }
 
     const totalHandler = () => {
+     
         props.handleCategory();
     }
 
@@ -125,10 +126,11 @@ function Sidebar(props) {
                     height: '100vh',
                     position: 'fixed',
                     left: 0,
-                    padding: '0 10px 0 10px',
+                    paddingLeft:'10px'
                    
                 }}
                 theme="light"
+                className="sidebar"
                 >
                     
                 <div className="logo" style ={{ display:'flex' ,alignItems:'center' ,justifyContent:'center' ,fontSize : '20px',borderBottom : '1px solid gray',}}  >

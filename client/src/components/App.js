@@ -6,6 +6,7 @@ import RegisterPage from './views/RegisterPage/RegisterPage'
 import LandingPage from './views/BlogPage/LanderPage'
 import WritePage from './views/WritePage/WritePage'
 import DetailContentsPage from './views/DetailContentsPage/DetailContentsPage'
+import EditPage from './views/EditPage/EditPage'
 import Auth from '../hoc/auth'
 import "antd/dist/antd.css"
 import './views/BlogPage/LanderPage.css'
@@ -25,7 +26,7 @@ function App() {
                     <Route exact path="/blog/:userId" component={Auth(LandingPage,null)} />
                     <Route exact path="/blog/:userId/:contentId" component={Auth(DetailContentsPage,null)} />
                     <Route exact path="/write" component={Auth(WritePage,true)} />
-                
+                    <Route exact path="/edit/:contentId" component={Auth(EditPage,true)} />
                 
                 
                 

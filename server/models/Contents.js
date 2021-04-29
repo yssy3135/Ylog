@@ -14,6 +14,9 @@
     contents: {
         type : String,
     },
+    textcontents: {
+        type : String,
+    },
     images:{
         type :Array,
         default:[]

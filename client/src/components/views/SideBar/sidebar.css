@@ -4,3 +4,8 @@
     padding-top: 0.1px;
     border-right: 1px solid #5f6b75;
 }
+
+
+.sidebar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
