@@ -90,12 +90,14 @@ function LanderPage(props) {
     const renderCards = Contents.map((content,index) => {
 
         if(user.userData._id === userId){
-            return <Col key= {index} lg={4} md={8} xs={20} >
+            return <Col key= {index} lg={4} md={8} xs={24}   >
        
                 <Card
                     hoverable
+               
                     cover ={<ImageSlider content= {content} cardHandler = {cardHandler} />}
                     actions={[  <EditOutlined key="edit" onClick ={ () => {cardHandler("edit",content ) } } />]}
+                    
                     >
                         <Meta
                             onClick ={ () => {cardHandler("detail",content) }}
@@ -187,7 +189,7 @@ function LanderPage(props) {
                         </div>
 
 
-                        <Row gutter ={[16,16]}>
+                        <Row gutter ={[16,16]} style={{height:'10%'}}>
                             {renderCards}
                         </Row>
 
