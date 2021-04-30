@@ -30,7 +30,7 @@ function Welcome(props) {
 
             <div>
                 <Layout style={{height :'100vh'}}>
-                    <div style={{ display :'flex', justifyContent:'center',height: '20%'  }}>Header</div>
+                    <div style={{ display :'flex', justifyContent:'center',height: '20%'  }}></div>
                     <Content
                         style={{ display :'flex', justifyContent:'center',height: '50%', backgroundColor: 'skyblue',alignItems:'center' }}>
                         <h1 style={{fontSize :  '50px'}}>

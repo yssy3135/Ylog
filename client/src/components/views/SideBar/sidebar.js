@@ -21,6 +21,7 @@ function Sidebar(props) {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [category, setCategory] = useState("");
     const [categoryNames, setcategoryNames] = useState([])
+    const [categoryKey, setcategoryKey] = useState(0)
 
 
     useEffect(() => {
@@ -72,6 +73,7 @@ function Sidebar(props) {
         .then( response => {
             if(response.data.success){
                 setcategoryNames(response.data.categoryNames)
+                setCategory("")
                 return alert("카테고리가 추가되었습니다.")
             }else{
                 return alert(response.err)
@@ -87,13 +89,14 @@ function Sidebar(props) {
     };
 
     const categoryChangeHandler = (event) => {
+        
         setCategory(event.currentTarget.value);
     }
     
     
     const showCategory = categoryNames.map((name,index) => {
         
-        return   <Menu.Item value={name._id} key={index+1} icon={<UserOutlined />}>
+        return   <Menu.Item value={name._id} key={index+1}  icon={<UserOutlined />}>
                     <RightOutlined />
                     {name.category}
                 </Menu.Item>
@@ -101,15 +104,16 @@ function Sidebar(props) {
             }) 
             
     const selectedHandler = (event) => {
-
+        setcategoryKey(event.item.props.eventKey)
         props.handleCategory(event.item.props.value);
     }
 
     const totalHandler = () => {
-     
+        setcategoryKey(0)
         props.handleCategory();
     }
 
+  
     return (
     
             <Sider
@@ -141,11 +145,11 @@ function Sidebar(props) {
                 <PlusOutlined  onClick ={showModal} style ={{display : 'flex' , justifyContent:'flex-end', paddingRight:'15px',fontSize:'large'}} />
 
                 <Modal title="카테고리 추가" visible={isModalVisible} onOk={handleOk} onCancel={handleCancel}>
-                    <Input onChange = {categoryChangeHandler} placeholder ="추가할 카테고리를 입력하세요"/>
+                    <Input  value={category} onChange = {categoryChangeHandler} placeholder ="추가할 카테고리를 입력하세요"/>
                 </Modal>
 
 
-                <Menu onClick={selectedHandler}  mode="inline" defaultSelectedKeys={['0']}  >
+                <Menu selectedKeys={categoryKey} onClick={selectedHandler}  mode="inline" defaultSelectedKeys={['0']}  >
                      {showCategory}
                 </Menu>
 

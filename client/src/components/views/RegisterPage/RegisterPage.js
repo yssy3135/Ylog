@@ -79,7 +79,7 @@ function RegisterPage(props) {
                         if(response.payload.success){
                             props.history.push("/login")
                         }else{
-                            alert(response.payload.err.errmsg)
+                            alert("회원가입에 실패했습니다.")
                         }
                     })
 
@@ -190,6 +190,7 @@ function RegisterPage(props) {
                                     className={
                                         errors.password && touched.password ? 'text-input error' : 'text-input'
                                     }
+                                    style ={{fontFamily: 'cursive'}}
                                     />
                                     {errors.password && touched.password && (
                                     <div className="input-feedback">{errors.password}</div>
@@ -207,6 +208,7 @@ function RegisterPage(props) {
                                     className={
                                         errors.confirmPassword && touched.confirmPassword ? 'text-input error' : 'text-input'
                                     }
+                                    style ={{fontFamily: 'cursive'}}
                                     />
                                     {errors.confirmPassword && touched.confirmPassword && (
                                     <div className="input-feedback">{errors.confirmPassword}</div>

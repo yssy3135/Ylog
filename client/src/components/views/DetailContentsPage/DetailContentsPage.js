@@ -34,6 +34,13 @@ function DetailContentsPage(props) {
         axios.post('/api/contents/detail',body)
         .then(response => {
             if(response.data.success){
+
+                let ymd = response.data.contentsInfo[0].createdAt.substring(0,10)
+                let hmc = response.data.contentsInfo[0].createdAt.substring(11,19)
+
+
+                
+                response.data.contentsInfo[0].createdAt = ymd+" "+hmc
                 console.log(response.data)
                 setcontentsInfo(response.data.contentsInfo[0])
                 setcategoryInfo(response.data.contentsInfo[0].category)
@@ -83,7 +90,7 @@ function DetailContentsPage(props) {
                
                 <div style= {{     
                             height:'50px',
-                            width:'880px',
+                            width:'45%',
                             marginBottom :'30px',
                             
                             display : 'flex',
@@ -98,16 +105,26 @@ function DetailContentsPage(props) {
                 </div>
                     <div style= {{     
                             height:'50px',
-                            width:'880px',
-                            marginBottom :'30px',
+                            width:'45%',
+                            padding: '2% 0 3.5% 0',
                             borderBottom:'1px solid black',
                             display : 'flex',
                             alignItems:'center',
-                            paddingBottom: '20px',
                             fontSize: 'xxx-large'
                         }}>
                         {contentsInfo.title}
                     </div>
+
+                    <div style= {{     
+                            height:'50px',
+                            width:'45%',
+                            display : 'flex',
+                            alignItems:'center',
+                            paddingBottom : '20px',
+                            fontSize: 'large',
+                            justifyContent: 'flex-end'
+                }} >{contentsInfo.createdAt}</div> 
+
                 
 
                 <div id = "viewer" style= {{     
@@ -115,7 +132,7 @@ function DetailContentsPage(props) {
                     paddingLeft: '10px',
                     paddingRight: '10px',
                 
-                    width:'880px',
+                    width:'45%',
                     minHeight:'600px',
                     padding: '20px',
                     borderBottom:'1px solid black',

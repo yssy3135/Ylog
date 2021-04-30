@@ -12,7 +12,7 @@ const { Option } = Select;
 function EditPage(props) {
   
     
-    const contentInfo = props.location.state.contentsInfo.content;
+    const contentInfo = props.location.state.contentsInfo;
     const [Title, setTitle] = useState(contentInfo.title);
     const [Images, setImages] = useState(contentInfo.images);
     const [Category, setCategory] = useState([]);
@@ -40,7 +40,7 @@ function EditPage(props) {
             editor = new Editor({
             el: document.querySelector('#editor'),
             previewStyle: 'vertical',
-            height:'700px',
+            height:'auto',
             initialEditType: 'wysiwyg',
             initialValue : contentInfo.contents,
             hooks : {
@@ -133,6 +133,7 @@ function EditPage(props) {
                         paddingLeft: '10px',
                         paddingRight: '10px',
                         paddingBottom: '50px',
+                        height:'100%',
                         width:'880px',
                         }}>
                 

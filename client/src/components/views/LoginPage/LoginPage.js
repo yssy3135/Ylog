@@ -90,7 +90,7 @@ function LoginPage(props) {
                         <Input
                           id="id"
                           prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                          placeholder="Enter your email"
+                          placeholder="Enter your id"
                           type="text"
                           value={values.id}
                           onChange={handleChange}

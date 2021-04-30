@@ -8,7 +8,7 @@ import Meta from 'antd/lib/card/Meta'
 import Axios from 'axios';
 import HeaderPage from '../HeaderPage/HeaderPage'
 import {
-    EditOutlined, PropertySafetyFilled
+    EditOutlined
   } from '@ant-design/icons';
 
 
@@ -73,6 +73,7 @@ function LanderPage(props) {
     const cardHandler = (type,data) =>{
        
         if(type === "edit"){
+            console.log(data)
             props.match.params = data;
             props.history.push( {
                 pathname: `/edit/${data._id}`,
@@ -94,10 +95,10 @@ function LanderPage(props) {
                 <Card
                     hoverable
                     cover ={<ImageSlider content= {content} cardHandler = {cardHandler} />}
-                    actions={[  <EditOutlined key="edit" onClick ={ () => {cardHandler("edit",{content}) } } />]}
+                    actions={[  <EditOutlined key="edit" onClick ={ () => {cardHandler("edit",content ) } } />]}
                     >
                         <Meta
-                            onClick ={ () => {cardHandler("detail",{content}) }}
+                            onClick ={ () => {cardHandler("detail",content) }}
                             title={content.title}
                         /> 
                 
@@ -122,7 +123,7 @@ function LanderPage(props) {
                     <a href = {`/blog/${userId}/${content._id}`}>
                         <Card
                             hoverable
-                            cover ={<ImageSlider images= {content.images}/>}
+                            cover ={<ImageSlider content= {content} cardHandler = {cardHandler} />}
                          
                             >
                                 <Meta
