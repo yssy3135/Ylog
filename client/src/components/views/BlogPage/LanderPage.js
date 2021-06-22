@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react';
 import {useSelector} from 'react-redux'
 
 import { Layout,Col,Card,Row, Button ,} from 'antd';
-import Sidebar from '../SideBar/Sidebar'
+import Sidebar from '../SideBar/sidebar'
 import ImageSlider from '../../utils/ImageSlider'
 import Meta from 'antd/lib/card/Meta'
 import Axios from 'axios';
