@@ -12,6 +12,11 @@ import './index.css';
 
 const createStoreWithMiddleware = applyMiddleware(promiseMiddleware, ReduxThunk)(createStore);
 
+
+let arr = new Array(5);
+
+
+
 ReactDOM.render(
     <Provider
         store={createStoreWithMiddleware(

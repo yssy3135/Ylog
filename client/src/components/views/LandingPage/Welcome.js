@@ -32,11 +32,14 @@ function Welcome(props) {
                 <Layout style={{height :'100vh'}}>
                     <div style={{ display :'flex', justifyContent:'center',height: '20%'  }}></div>
                     <Content
-                        style={{ display :'flex', justifyContent:'center',height: '50%', backgroundColor: 'skyblue',alignItems:'center' }}>
+                        style={{ display :'flex', justifyContent:'center',height: '50%', backgroundColor: 'white',alignItems:'center' }}>
                         <h1 style={{fontSize :  '50px'}}>
                             Y Log
                         </h1>
-
+                        <img src = "http://18.221.22.88:5000/uploads/charater.png"
+                            style={{justifyContent:'center',height: '70%', alignItems :'center' }}
+                        />
+                        
                     </Content>
                     <div
                         style={{ height: '30%',display :'flex', alignItems:'center', justifyContent:'center' }}>
@@ -62,7 +65,7 @@ function Welcome(props) {
         return (
             <div>
                 <Layout style = {{height :'100vh'}}>
-                    <div style = {{ display :'flex', justifyContent:'center',height: '20%'  }}>Header</div>
+                    <div style = {{ display :'flex', justifyContent:'center',height: '20%'  }}></div>
                     <Content style = {{ display :'flex', justifyContent:'center',height: '50%', backgroundColor: 'skyblue',alignItems:'center' }}>
                         <h1 style = {{fontSize :  '50px'}}>
                             Y Log

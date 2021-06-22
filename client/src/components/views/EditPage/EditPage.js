@@ -40,7 +40,7 @@ function EditPage(props) {
             editor = new Editor({
             el: document.querySelector('#editor'),
             previewStyle: 'vertical',
-            height:'auto',
+            height:'700px',
             initialEditType: 'wysiwyg',
             initialValue : contentInfo.contents,
             hooks : {

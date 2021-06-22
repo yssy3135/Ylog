@@ -110,10 +110,9 @@ function RegisterPage(props) {
                     
                             <Form style={{ maxWidth: '375px',   width: '100%', backgroundColor: 'skyblue' }} onSubmit={handleSubmit} >
 
-                                <Form.Item required label="Name">
+                                <Form.Item required label="이름">
                                     <Input
                                     id="name"
-                                    placeholder="Enter your name"
                                     type="text"
                                     value={values.name}
                                     onChange={handleChange}
@@ -127,10 +126,9 @@ function RegisterPage(props) {
                                     )}
                                 </Form.Item>
 
-                                <Form.Item required label="id">
+                                <Form.Item required label="아이디">
                                     <Input
                                     id="id"
-                                    placeholder="Enter your ID"
                                     type="text"
                                     value={values.id}
                                     onChange={handleChange}
@@ -144,10 +142,9 @@ function RegisterPage(props) {
                                     )}
                                 </Form.Item>
 
-                                <Form.Item required label="Email" hasFeedback validateStatus={errors.email && touched.email ? "error" : 'success'}>
+                                <Form.Item required label="이메일" hasFeedback validateStatus={errors.email && touched.email ? "error" : 'success'}>
                                     <Input
                                     id="email"
-                                    placeholder="Enter your Email"
                                     type="email"
                                     value={values.email}
                                     onChange={handleChange}
@@ -162,10 +159,10 @@ function RegisterPage(props) {
                                 </Form.Item>
 
                                 
-                                <Form.Item required label="Phone">
+                                <Form.Item required label="핸드폰">
                                     <Input
                                     id="phone"
-                                    placeholder="Enter your phone"
+                                    placeholder="010-0000-0000"
                                     type="phone"
                                     value={values.phone}
                                     onChange={handleChange}
@@ -179,10 +176,10 @@ function RegisterPage(props) {
                                     )}
                                 </Form.Item>
 
-                                <Form.Item required label="Password" hasFeedback validateStatus={errors.password && touched.password ? "error" : 'success'} >
+                                <Form.Item required label="비밀번호" hasFeedback validateStatus={errors.password && touched.password ? "error" : 'success'} >
                                     <Input
                                     id="password"
-                                    placeholder="Enter your password"
+                                    placeholder="6자리이상"
                                     type="password"
                                     value={values.password}
                                     onChange={handleChange}
@@ -190,17 +187,15 @@ function RegisterPage(props) {
                                     className={
                                         errors.password && touched.password ? 'text-input error' : 'text-input'
                                     }
-                                    style ={{fontFamily: 'cursive'}}
                                     />
                                     {errors.password && touched.password && (
                                     <div className="input-feedback">{errors.password}</div>
                                     )}
                                 </Form.Item>
 
-                                <Form.Item required label="Confirm" hasFeedback>
+                                <Form.Item required label="비밀번호 확인" hasFeedback>
                                     <Input
                                     id="confirmPassword"
-                                    placeholder="Enter your confirmPassword"
                                     type="password"
                                     value={values.confirmPassword}
                                     onChange={handleChange}
@@ -208,7 +203,6 @@ function RegisterPage(props) {
                                     className={
                                         errors.confirmPassword && touched.confirmPassword ? 'text-input error' : 'text-input'
                                     }
-                                    style ={{fontFamily: 'cursive'}}
                                     />
                                     {errors.confirmPassword && touched.confirmPassword && (
                                     <div className="input-feedback">{errors.confirmPassword}</div>

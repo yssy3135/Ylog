@@ -83,14 +83,14 @@ function LoginPage(props) {
                 } = props;
                 return (
                     <div className="app" style={{ width: '100%', backgroundColor: 'skyblue' ,display : 'flex', justifyContent:'center', paddingTop : '1.5%'}}>
-                    <Title level={1}>로그인</Title>
+                    
                     <form onSubmit={handleSubmit} style={{ width: '350px' }}>
         
                       <Form.Item required>
                         <Input
                           id="id"
                           prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                          placeholder="Enter your id"
+                          placeholder="아이디"
                           type="text"
                           value={values.id}
                           onChange={handleChange}
@@ -109,7 +109,7 @@ function LoginPage(props) {
                           style ={{fontFamily : '-apple-system'}}
                           id="password"
                           prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                          placeholder="Enter your password"
+                          placeholder="비밀번호"
                           type="password"
                           value={values.password}
                           onChange={handleChange}
@@ -128,16 +128,13 @@ function LoginPage(props) {
                       )}
         
                       <Form.Item>
-                        <Checkbox id="rememberMe" onChange={handleRememberMe} checked={rememberMe} >Remember me</Checkbox>
+                        <Checkbox id="rememberMe" onChange={handleRememberMe} checked={rememberMe} >비밀번호 기억</Checkbox>
                         <div>
                           <Button type="primary" htmlType="submit" className="login-form-button" style={{ minWidth: '100%' }} disabled={isSubmitting} onSubmit={handleSubmit}>
-                            Log in
+                            로그인
                         </Button>
                         </div>
-                        <a className="login-form-forgot" href="/reset_user" style={{ float: 'right' }}>
-                          forgot password
-                        </a>
-                        Or <a href="/register">register now!</a>
+                        <a href="/register">회원가입</a>
                       </Form.Item>
                     </form>
                   </div>

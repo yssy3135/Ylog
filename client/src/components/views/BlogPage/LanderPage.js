@@ -1,8 +1,8 @@
 import React,{useEffect,useState} from 'react';
 import {useSelector} from 'react-redux'
 
-import { Layout,Col,Card,Row, Button ,} from 'antd';
-import Sidebar from '../SideBar/sidebar'
+import { Layout,Col,Card,Row, Button ,Image} from 'antd';
+import Sidebar from '../SideBar/Sidebar'
 import ImageSlider from '../../utils/ImageSlider'
 import Meta from 'antd/lib/card/Meta'
 import Axios from 'axios';
@@ -67,13 +67,13 @@ function LanderPage(props) {
             }
 
         })
+     
     }
 
 
     const cardHandler = (type,data) =>{
        
         if(type === "edit"){
-            console.log(data)
             props.match.params = data;
             props.history.push( {
                 pathname: `/edit/${data._id}`,
@@ -88,13 +88,12 @@ function LanderPage(props) {
 
 
     const renderCards = Contents.map((content,index) => {
-
+        
         if(user.userData._id === userId){
             return <Col key= {index} lg={4} md={8} xs={24}   >
        
                 <Card
                     hoverable
-               
                     cover ={<ImageSlider content= {content} cardHandler = {cardHandler} />}
                     actions={[  <EditOutlined key="edit" onClick ={ () => {cardHandler("edit",content ) } } />]}
                     
@@ -168,41 +167,32 @@ function LanderPage(props) {
 
 
     return (
-        <Layout  style={{ height: '100vh'   }} >
-            <Sidebar userData = {userId} handleCategory = {selected => handleCategory(selected)} ></Sidebar>
+        <Layout>
+            <Layout className="site-layout" > 
+            <Sidebar userData = {userId} handleCategory = {selected => handleCategory(selected)}></Sidebar>
+                <Layout>
+                    <HeaderPage props={props}></HeaderPage>
+                
+                        <Content className="site-layout-background" 
+                                style={{
+                                padding: 24, 
+                                minHeight: 360,
+                                margin: '24px 16px 0'
+                                }}>
 
-            <Layout className="site-layout" style = {{ marginLeft: 200 }}> 
-             
-
-                <HeaderPage props={props}></HeaderPage>
-           
-              
-                <Content style={{ margin: '16px',    }}>
-                    <div className="site-layout-background" 
-                            style={{overflow: 'auto',
-                            height:'100%',
-                            padding: 24, 
-                            minHeight: 360 }}>
-
-                        <div style={{display:'flex', justifyContent:'flex-end' ,marginBottom:'10px'}}>
-                            <Button onClick = { () => { props.history.push('/write')}} >글쓰기</Button>
-                        </div>
+                            <div style={{display:'flex', justifyContent:'flex-end' ,marginBottom:'10px'}}>
+                                <Button onClick = { () => { props.history.push('/write')}} >글쓰기</Button>
+                            </div>
 
 
-                        <Row gutter ={[16,16]} style={{height:'10%'}}>
-                            {renderCards}
-                        </Row>
+                            <Row gutter ={[16,16]} style={{height:'10%'}}>
+                                {renderCards}
+                            </Row>
+                        </Content>
+                  
 
-                    </div>
-
-                    
-
-                </Content>
-
-            
+                </Layout>
             </Layout>
-         
-
         </Layout>
     )
 }

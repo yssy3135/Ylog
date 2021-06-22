@@ -42,7 +42,7 @@ function HeaderPage(data) {
                         <div style ={{width:'38.234px'}}></div>
                         <div>
                         <Header className="site-layout-background">
-                        YOON
+                                <h1>Y log</h1>
                         </Header>
                         </div>
                         <div style={{margin:'24px'}}>

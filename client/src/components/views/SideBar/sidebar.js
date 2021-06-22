@@ -119,26 +119,18 @@ function Sidebar(props) {
             <Sider
                 breakpoint="lg"
                 collapsedWidth="0"
-                onBreakpoint={broken => {
-                    console.log(broken);
-                }}
-                onCollapse={(collapsed, type) => {
-                    console.log(collapsed, type);
-                }}
                 style={{
                     overflow: 'auto',
-                    height: '100vh',
-                    position: 'fixed',
-                    left: 0,
-                    paddingLeft:'10px'
-                   
+                    height: '100vh',               
                 }}
                 theme="light"
-                className="sidebar"
+                className="site-layout-background"
                 >
                     
-                <div className="logo" style ={{ display:'flex' ,alignItems:'center' ,justifyContent:'center' ,fontSize : '20px',borderBottom : '1px solid gray',}}  >
-                    Y LOG
+                <div className="logo" style ={{ height:'15%',display:'flex' ,alignItems:'center' ,justifyContent:'center',borderBottom : '1px solid gray',}}  >
+                    <img src = "http://localhost:5000/uploads/charater.png"
+                                style={{height: '100%' ,paddingBottom:'5%'}}
+                            />
                 </div>
                 
                 

@@ -29,8 +29,6 @@ function WritePage(props) {
   
 
     const  getCategory = () => {
-       console.log(user)
-
         let  body = {
             id : user.userData._id
         }
