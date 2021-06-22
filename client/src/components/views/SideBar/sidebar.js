@@ -128,7 +128,7 @@ function Sidebar(props) {
                 >
                     
                 <div className="logo" style ={{ height:'15%',display:'flex' ,alignItems:'center' ,justifyContent:'center',borderBottom : '1px solid gray',}}  >
-                    <img src = "http://localhost:5000/uploads/charater.png"
+                    <img src = "http://18.221.22.88:5000/uploads/charater.png"
                                 style={{height: '100%' ,paddingBottom:'5%'}}
                             />
                 </div>

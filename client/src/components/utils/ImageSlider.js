@@ -18,7 +18,7 @@ function ImageSlider(props) {
         return (
         
             <div style = {{width:'100%', height:'200px'}}onClick ={ () => {props.cardHandler("detail",props.content)}} >
-                <img  style = {{width: '100%' , height: '100%'}} src={`http://localhost:5000/${props.content.images[0]}`}/>
+                <img  style = {{width: '100%' , height: '100%'}} src={`http://18.221.22.88:5000/${props.content.images[0]}`}/>
             </div>
 
              

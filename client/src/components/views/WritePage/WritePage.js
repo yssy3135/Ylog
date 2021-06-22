@@ -89,7 +89,7 @@ function WritePage(props) {
                             console.log(response.data.filePath)
                             setImages([...Images,response.data.filePath])
                             let replaced = response.data.filePath.replace("\\","/");
-                            callback(`http://localhost:5000/${replaced}`,"alt text");
+                            callback(`http://18.221.22.88:5000/${replaced}`,"alt text");
 
                         }else{
                             alert('파일을 저장하는데 실패했습니다.')
