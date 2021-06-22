@@ -66,13 +66,14 @@ function Welcome(props) {
             <div>
                 <Layout style = {{height :'100vh'}}>
                     <div style = {{ display :'flex', justifyContent:'center',height: '20%'  }}></div>
-                    <Content style = {{ display :'flex', justifyContent:'center',height: '50%', backgroundColor: 'skyblue',alignItems:'center' }}>
-                        <h1 style = {{fontSize :  '50px'}}>
+                    <Content style={{ display :'flex', justifyContent:'center',height: '50%', backgroundColor: 'white',alignItems:'center' }}>
+                        <h1 style={{fontSize :  '50px'}}>
                             Y Log
                         </h1>
-                            
+                        <img src = "http://18.221.22.88:5000/uploads/charater.png"
+                            style={{justifyContent:'center',height: '70%', alignItems :'center' }}
+                        />
                         
-                            
                     </Content>
                     <div style = {{ height: '30%',display :'flex', alignItems:'center', justifyContent:'center' }}  >
                         <Button type='primary' style = {{ marginRight : '5%', width : '20%', height : '20%'}} 
