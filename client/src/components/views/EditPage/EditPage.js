@@ -46,14 +46,14 @@ function EditPage(props) {
             hooks : {
                 addImageBlobHook: (blob,callback) =>{
                     
-                    console.log(blob)
+                
                     formData.append("file",blob)
                     
 
                     axios.post("/api/contents/image",formData,config)
                     .then(response => {
                         if(response.data.success){
-                            console.log(response.data.filePath)
+                           
                             setImages([...Images,response.data.filePath])
                             let replaced = response.data.filePath.replace("\\","/");
                             callback(`http://18.221.22.88:5000/${replaced}`,"alt text");
@@ -95,7 +95,7 @@ function EditPage(props) {
         .then(response => {
             if(response.data.success){
        
-                props.history.push(`/blog/${user.userData._id}/${contentInfo._id}`)
+                props.history.push(`/blog/${user.userData.id}/${contentInfo._id}`)
             }else{
                alert("수정에 실패했습니다.")
             }
@@ -141,7 +141,7 @@ function EditPage(props) {
                     
                     <div style={{display:'flex' ,justifyContent:'center'}}>
                         <Button onClick = {editHandler}  style={{marginRight:'10px'}}>수정</Button>
-                        <Button onClick = {()=> { props.history.push(`/blog/${props.user.userData._id}`)}}>취소</Button>
+                        <Button onClick = {()=> { props.history.push(`/blog/${props.user.userData.id}`)}}>취소</Button>
                     </div>   
             </div>
    

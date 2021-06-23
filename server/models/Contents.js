@@ -3,8 +3,8 @@
 
 
  const contentsSchema = mongoose.Schema({
-    writer : {
-        type : Schema.Types.ObjectId,
+    id:{
+        type: String,
         ref:'blogUser'
     },
     title: {

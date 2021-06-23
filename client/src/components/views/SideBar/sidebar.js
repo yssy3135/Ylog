@@ -59,6 +59,7 @@ function Sidebar(props) {
     const handleOk = () => {
 
         if(!category){
+            console.log(props.userData)
             return alert("카테고리 이름을 입력해주세요")
         }
 
@@ -66,10 +67,8 @@ function Sidebar(props) {
             id : props.userData,
             category : category 
         }
-    
 
         Axios.post('/api/categorys',body)
-
         .then( response => {
             if(response.data.success){
                 setcategoryNames(response.data.categoryNames)

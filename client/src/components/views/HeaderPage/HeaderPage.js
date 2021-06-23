@@ -12,7 +12,7 @@ function HeaderPage(data) {
     const dispatch = useDispatch();
 
     const logoutHandler = () => {
-        console.log(data)
+     
         let dataToSubmit = user.userData
             dispatch(logoutUser(dataToSubmit)).then(response => {
             if(response.payload.success){
@@ -29,7 +29,7 @@ function HeaderPage(data) {
     }
     
 
-    if( user.userData && (user.userData._id === userId)){
+    if( user.userData && (user.userData.id === userId)){
         return <div style={{backgroundColor:"white"}}>
         
                     <div style={{ borderBottom : '1px solid gray',

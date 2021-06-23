@@ -43,7 +43,6 @@ function DetailContentsPage(props) {
 
                 
                 response.data.contentsInfo[0].createdAt = ymd+" "+hmc
-                console.log(response.data)
                 setcontentsInfo(response.data.contentsInfo[0])
                 setcategoryInfo(response.data.contentsInfo[0].category)
                 setwriteInfo(response.data.contentsInfo[0].writer);
@@ -87,7 +86,7 @@ function DetailContentsPage(props) {
 
 
 
-        if(user == userId){
+        if(user.userData && user.userData.id === userId){
 
             return (
                 <div>

@@ -18,7 +18,7 @@ const { Content } = Layout;
 
 function LanderPage(props) {
     const userId = props.match.params.userId;
-    
+
 
     const [Skip, setSkip] = useState(0);
     const [Limit, setLimit] = useState(8);
@@ -34,7 +34,7 @@ function LanderPage(props) {
             skip : Skip,
             limit : Limit
         }
-
+       
         getContents();
 
 
@@ -44,7 +44,7 @@ function LanderPage(props) {
     const getContents = () => {
       
         let body = {
-            writer : userId,
+            id : userId,
             category : Category
         }
         Axios.post('/api/contents/content',body)
@@ -89,7 +89,7 @@ function LanderPage(props) {
 
     const renderCards = Contents.map((content,index) => {
         
-        if(user.userData._id === userId){
+        if(user.userData.id === userId){
             return <Col key= {index} lg={4} md={8} xs={24}   >
        
                 <Card
@@ -156,7 +156,7 @@ function LanderPage(props) {
     }
 
     const loginHandler = () => {
-        if(user.userData._id === userId){
+        if(user.userData.id === userId){
             return <Button>로그아웃</Button>
         }else{
             return <Button>로그인</Button>
@@ -165,36 +165,66 @@ function LanderPage(props) {
     
 
 
-
-    return (
-        <Layout>
-            <Layout className="site-layout" > 
-            <Sidebar userData = {userId} handleCategory = {selected => handleCategory(selected)}></Sidebar>
-                <Layout>
-                    <HeaderPage props={props}></HeaderPage>
-                
-                        <Content className="site-layout-background" 
-                                style={{
-                                padding: 24, 
-                                minHeight: 360,
-                                margin: '24px 16px 0'
-                                }}>
-
-                            <div style={{display:'flex', justifyContent:'flex-end' ,marginBottom:'10px'}}>
-                                <Button onClick = { () => { props.history.push('/write')}} >글쓰기</Button>
-                            </div>
-
-
-                            <Row gutter ={[16,16]} style={{height:'10%'}}>
-                                {renderCards}
-                            </Row>
-                        </Content>
-                  
-
+    if(user.userData && user.userData.id === userId){
+        return (
+            <Layout>
+                <Layout className="site-layout" > 
+                <Sidebar userData = {userId} handleCategory = {selected => handleCategory(selected)}></Sidebar>
+                    <Layout>
+                        <HeaderPage props={props}></HeaderPage>
+                    
+                            <Content className="site-layout-background" 
+                                    style={{
+                                    padding: 24, 
+                                    minHeight: 360,
+                                    margin: '24px 16px 0'
+                                    }}>
+    
+                                <div style={{display:'flex', justifyContent:'flex-end' ,marginBottom:'10px'}}>
+                                    <Button onClick = { () => { props.history.push('/write')}} >글쓰기</Button>
+                                </div>
+    
+    
+                                <Row gutter ={[16,16]} style={{height:'10%'}}>
+                                    {renderCards}
+                                </Row>
+                            </Content>
+                      
+    
+                    </Layout>
                 </Layout>
             </Layout>
-        </Layout>
-    )
+        )
+
+    }else{
+        return (
+            <Layout>
+                <Layout className="site-layout" > 
+                <Sidebar userData = {userId} handleCategory = {selected => handleCategory(selected)}></Sidebar>
+                    <Layout>
+                        <HeaderPage props={props}></HeaderPage>
+                    
+                            <Content className="site-layout-background" 
+                                    style={{
+                                    padding: 24, 
+                                    minHeight: 360,
+                                    margin: '24px 16px 0'
+                                    }}>
+
+                                <Row gutter ={[16,16]} style={{height:'10%'}}>
+                                    {renderCards}
+                                </Row>
+                            </Content>
+                      
+    
+                    </Layout>
+                </Layout>
+            </Layout>
+        )
+
+
+
+    }
 }
 
 export default LanderPage

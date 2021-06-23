@@ -34,7 +34,8 @@ router.post("/write",(req,res) => {
    
     const content = new Contents(req.body);
    
-
+    console.log(content)
+    
     content.save((err,doc) => {
         if(err) {
             
@@ -122,7 +123,7 @@ router.post("/detail",(req,res) => {
 router.post("/edit",(req,res) => {
 
     let body = req.body
-    console.log(body.contentsId)
+    
     Contents.findOneAndUpdate(
         {_id : body.contentsId},
         {
@@ -153,7 +154,6 @@ router.post("/edit",(req,res) => {
 router.post("/delete",(req,res) => {
 
     let body = req.body
-    console.log(body)
     Contents.findOneAndDelete(
         {_id : body.contentId},
         (err,doc) => {

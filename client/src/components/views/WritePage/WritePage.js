@@ -30,7 +30,7 @@ function WritePage(props) {
 
     const  getCategory = () => {
         let  body = {
-            id : user.userData._id
+            id : user.userData.id
         }
 
          
@@ -79,14 +79,14 @@ function WritePage(props) {
             hooks : {
                 addImageBlobHook: (blob,callback) =>{
                     
-                    console.log(blob)
+            
                     formData.append("file",blob)
                     
 
                     axios.post("/api/contents/image",formData,config)
                     .then(response => {
                         if(response.data.success){
-                            console.log(response.data.filePath)
+                          
                             setImages([...Images,response.data.filePath])
                             let replaced = response.data.filePath.replace("\\","/");
                             callback(`http://18.221.22.88:5000/${replaced}`,"alt text");
@@ -117,7 +117,7 @@ function WritePage(props) {
         }
 
         const contents = {
-            writer : props.user.userData._id,
+            id : props.user.userData.id,
             title : Title,
             contents : content,
             textcontents : textcontent,
@@ -126,11 +126,13 @@ function WritePage(props) {
            
         }
 
+        
+
         axios.post('/api/contents/write',contents)
         .then(response => {
             if(response.data.success){
        
-                props.history.push(`/blog/${user.userData._id}`)
+                props.history.push(`/blog/${user.userData.id}`)
             }else{
                 console.log(response.data.err)
             }
@@ -179,7 +181,7 @@ function WritePage(props) {
                     
                     <div style={{display:'flex' ,justifyContent:'center'}}>
                         <Button onClick = {submitHandler}  style={{marginRight:'10px'}}>완료</Button>
-                        <Button onClick = {()=> { props.history.push(`blog/${props.user.userData._id}`)}}>취소</Button>
+                        <Button onClick = {()=> { props.history.push(`blog/${props.user.userData.id}`)}}>취소</Button>
                     </div>   
             </div>
    

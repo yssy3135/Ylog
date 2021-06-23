@@ -80,7 +80,7 @@ router.post("/login", (req,res) => {
 })
 
 router.post("/logout",auth ,(req,res) => {
-    console.log(req.user._id)
+    
     User.findOneAndUpdate({ _id : req.user._id} , {token: "", tokenExp : ""} ,(err,doc) => {
         
         if(err) res.json({success: false,err})

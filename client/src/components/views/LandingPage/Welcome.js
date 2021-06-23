@@ -43,7 +43,7 @@ function Welcome(props) {
                     </Content>
                     <div
                         style={{ height: '30%',display :'flex', alignItems:'center', justifyContent:'center' }}>
-                        <Button onClick = {() => { props.history.push(`/blog/${user.userData._id}`)}}
+                        <Button onClick = {() => { props.history.push(`/blog/${user.userData.id}`)}}
                             type='primary' 
                             style={{  marginRight : '5%', width : '20%', height : '20%'}} 
                         >

@@ -65,7 +65,7 @@ function RegisterPage(props) {
             })}
 
             onSubmit = {(values, { setSubmitting }) =>{
-                console.log("서브밋")
+        
                 setTimeout(() => {
                     let dataToSubmit = {
                         name : values.name,
