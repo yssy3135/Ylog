@@ -30,7 +30,7 @@ function WritePage(props) {
 
     const  getCategory = () => {
         let  body = {
-            id : user.userData.id
+            userId : user.userData.userId
         }
 
          
@@ -112,12 +112,16 @@ function WritePage(props) {
         let textcontent = document.getElementsByClassName('tui-editor-contents')[0].innerText
         // console.log(editor.getTextObject(editor.getRange()))
         // console.log(document.getElementsByClassName('tui-editor-contents')[0].innerText)
-        if(!Title || !content || !categoryValue){
+        if(!categoryValue){
+            alert("카테고리를 선택해주세요")
+        }else if(!Title || !content || !categoryValue){
             return alert("모든 값을 작성해야합니다.")
+        }else if (Title.length >= 50){
+            alert("제목은 50글자 이하로 작성해야합니다")
         }
 
         const contents = {
-            id : props.user.userData.id,
+            userId : props.user.userData.userId,
             title : Title,
             contents : content,
             textcontents : textcontent,
@@ -132,7 +136,7 @@ function WritePage(props) {
         .then(response => {
             if(response.data.success){
        
-                props.history.push(`/blog/${user.userData.id}`)
+                props.history.push(`/blog/${user.userData.userId}`)
             }else{
                 console.log(response.data.err)
             }

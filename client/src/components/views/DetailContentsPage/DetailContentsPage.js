@@ -86,17 +86,14 @@ function DetailContentsPage(props) {
 
 
 
-        if(user.userData && user.userData.id === userId){
+        if(user.userData && user.userData.userId === userId){
 
             return (
                 <div>
       
                 <div style={{display:'flex' , flexDirection: 'column' ,alignItems:'center',backgroundColor:'#f0f2f5'}}>
-                   <div  style={{backgroundColor:'skyblue',padding: '5% 0 5% 0',backgroundColor:'white',width:'60%' }}>
+                   <div  style={{padding: '5%',backgroundColor:'white',width:'60%' }}>
                         <div style= {{     
-                                    height:'50px',
-                                    width:'100%',
-                                    marginBottom :'30px',
                                     display : 'flex',
                                     alignItems:'center',
                                     fontSize: 'xxx-large',
@@ -107,29 +104,21 @@ function DetailContentsPage(props) {
     
                     </div>
                         <div style= {{     
-                                height:'50px',
-                                width:'100%',
-                                padding: '2% 0 3.5% 0',
                                 borderBottom:'1px solid black',
                                 display : 'flex',
                                 alignItems:'center',
-                                fontSize: 'xxx-large'
+                                fontSize: '1.8rem',
+                                wordBreak:'break-all'
                             }}>
                             {contentsInfo.title}
                         </div>
     
                         <div style= {{     
-                                height:'50px',
-                                width:'100%',
                                 display : 'flex',
                                 alignItems:'center',
-                                paddingBottom : '20px',
-                                fontSize: 'large',
+                                fontSize: '1rem',
                                 justifyContent: 'flex-end'
-                    }} >{contentsInfo.createdAt}</div> 
-    
-                        
-    
+                    }}>{contentsInfo.createdAt}</div> 
                     <div id = "viewer" style= {{     
                         overflowY: 'hidden',
                         paddingLeft: '10px',
@@ -157,11 +146,8 @@ function DetailContentsPage(props) {
                 <div>
       
                 <div style={{display:'flex' , flexDirection: 'column' ,alignItems:'center',backgroundColor:'#f0f2f5'}}>
-                   <div  style={{backgroundColor:'skyblue',padding: '5% 0 5% 0',backgroundColor:'white',width:'60%' }}>
+                   <div  style={{padding: '5%',backgroundColor:'white',width:'60%' }}>
                         <div style= {{     
-                                    height:'50px',
-                                    width:'100%',
-                                    marginBottom :'30px',
                                     display : 'flex',
                                     alignItems:'center',
                                     fontSize: 'xxx-large',
@@ -172,13 +158,11 @@ function DetailContentsPage(props) {
     
                     </div>
                         <div style= {{     
-                                height:'50px',
-                                width:'100%',
-                                padding: '2% 0 3.5% 0',
                                 borderBottom:'1px solid black',
                                 display : 'flex',
                                 alignItems:'center',
-                                fontSize: 'xxx-large'
+                                fontSize: '1.8rem',
+                                wordBreak:'break-all'
                             }}>
                             {contentsInfo.title}
                         </div>

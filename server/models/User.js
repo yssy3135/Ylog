@@ -12,7 +12,7 @@ const userSchema = mongoose.Schema({
         type : String,
         maxlength: 50
     },
-    id : {
+    userId : {
         type:String,
         unique:1,
         maxlength:30

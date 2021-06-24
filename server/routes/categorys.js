@@ -15,8 +15,8 @@ router.post("/",(req,res) => {
         }
 
         Category.find()
-        .where('id')
-        .equals(req.body.id)
+        .where('userId')
+        .equals(req.body.userId)
         .exec((err,categoryNames) => {
          
     
@@ -37,8 +37,8 @@ router.post("/category",(req,res) => {
    
     
     Category.find()
-    .where('id')
-    .equals(req.body.id)
+    .where('userId')
+    .equals(req.body.userId)
     .exec((err,categoryNames) => {
         if(err) return res.status(400).json({success: false, err})
 

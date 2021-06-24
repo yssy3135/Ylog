@@ -68,8 +68,8 @@ function RegisterPage(props) {
         
                 setTimeout(() => {
                     let dataToSubmit = {
+                        userId : values.id,
                         name : values.name,
-                        id : values.id,
                         email : values.email,
                         phone : values.phone,
                         password : values.password,
@@ -103,7 +103,7 @@ function RegisterPage(props) {
                     handleReset,
                 } = props;
                   return (
-                    <div className="app" style={{width: '100%', backgroundColor: 'skyblue' ,display : 'flex', justifyContent:'center', paddingTop : '1.5%'}}>
+                    <div className="app" style={{ fontFamily:'나눔고딕' ,width: '100%', backgroundColor: 'skyblue' ,display : 'flex', justifyContent:'center', paddingTop : '1.5%'}}>
                         <Title level={1}>회원가입</Title>
                         <br/>
                         <br/>

@@ -34,7 +34,6 @@ router.post("/write",(req,res) => {
    
     const content = new Contents(req.body);
    
-    console.log(content)
     
     content.save((err,doc) => {
         if(err) {
@@ -50,7 +49,6 @@ router.post("/write",(req,res) => {
 router.post("/content",(req,res) => {
     let limit = req.body.limit ? parseInt(req.body.limit) : 20;
     let skip = req.body.skip ? parseInt(req.body.skip) :0;
-   
 
     if(req.body.category){
   
@@ -58,7 +56,7 @@ router.post("/content",(req,res) => {
             $and : [req.body]
         }
         Contents.find(form)
-        .populate("writer")
+        .populate("user")
         .populate("category")
         .skip(skip)
         .limit(limit)
@@ -75,21 +73,22 @@ router.post("/content",(req,res) => {
         })
 
     }else{
-        Contents.find()
-        .where('writer').equals(req.body.writer)
-        .populate("writer")
+        Contents.find({userId : req.body.userId})
+        .populate('user')
         .populate("category")
         .skip(skip)
         .limit(limit)
         .exec((err,contentsInfo) => {
-            if(err) {        
+            if(err) {   
+                console.log(err)
                 return res.status(400).json({success: false, err})
+            }else{
+                return res.status(200).json({
+                    success : true,
+                    contentsInfo,
+                    postSize : contentsInfo.length
+                })
             }
-            return res.status(200).json({
-                success : true,
-                contentsInfo,
-                postSize : contentsInfo.length
-            })
         })
 
     }

@@ -12,7 +12,7 @@ router.get("/auth",auth, (req,res) => {
     res.status(200).json({
         _id : req.user._id,
         name : req.user.name,
-        id : req.user.id,
+        userId : req.user.userId,
         email : req.user.email,
         isAdmin : req.user.role === 0 ? false:true,
         isAuth: true,
@@ -45,10 +45,9 @@ router.post("/register", (req, res) => {
 
 router.post("/login", (req,res) => {
    
-
-    User.findOne({id : req.body.id} ,(err,user)=>{
+    console.log(req.body)
+    User.findOne({userId : req.body.id} ,(err,user)=>{
         if(!user){
-            
             return res.json({
                 loginSuccess: false,
                 massage: "로그인 실패"
@@ -63,11 +62,10 @@ router.post("/login", (req,res) => {
             user.generateToken((err,user) => {
                 if(err) return res.status.send(400)
                 res.cookie("w_authhExp",user.tokenExp);
-                res
-                    .cookie("w_auth",user.token)
+                res.cookie("w_auth",user.token)
                     .status(200)
                     .json({
-                        loginSuccess:true,userId:user._id
+                        loginSuccess:true,userId:user.userId
                     })
 
             })

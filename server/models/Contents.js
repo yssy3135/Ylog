@@ -3,9 +3,13 @@
 
 
  const contentsSchema = mongoose.Schema({
-    id:{
-        type: String,
+    user:{
+        type: Schema.Types.ObjectId,
         ref:'blogUser'
+    },
+    userId : {
+        type:String,
+        maxlength:30
     },
     title: {
         type : String,

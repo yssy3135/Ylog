@@ -43,11 +43,14 @@ function Welcome(props) {
                     </Content>
                     <div
                         style={{ height: '30%',display :'flex', alignItems:'center', justifyContent:'center' }}>
-                        <Button onClick = {() => { props.history.push(`/blog/${user.userData.id}`)}}
+                        <Button onClick = {() => { props.history.push({
+                            pathname:`/blog/${user.userData.userId}`,
+                            state : {user: user}
+                        })}}
                             type='primary' 
                             style={{  marginRight : '5%', width : '20%', height : '20%'}} 
                         >
-                            {user.userData.id}님 환영합니다 (블로그로 이동)
+                            {user.userData.userId}님 환영합니다 (블로그로 이동)
                         </Button>
                         <Button type='primary' style = {{  width : '20%', height : '20%'}} 
                          onClick = {logoutHandler}>로그아웃</Button>
