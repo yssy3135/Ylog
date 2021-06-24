@@ -75,10 +75,10 @@ function EditPage(props) {
     const editHandler= (event) => {
       
 
-        let content = editor.getHtml();
-        let textcontent = document.getElementsByClassName('tui-editor-contents')[0].innerText
-        // console.log(editor.getTextObject(editor.getRange()))
-        // console.log(document.getElementsByClassName('tui-editor-contents')[0].innerText)
+        console.log(document.getElementsByClassName('tui-editor-contents'))
+        let content = document.getElementsByClassName('tui-editor-contents')[1].innerHTML
+        let textcontent = document.getElementsByClassName('tui-editor-contents')[1].innerText
+
         if(!Title || !content ){
             return alert("모든 값을 작성해야합니다.")
         }
@@ -95,7 +95,7 @@ function EditPage(props) {
         .then(response => {
             if(response.data.success){
        
-                props.history.push(`/blog/${user.userData.id}/${contentInfo._id}`)
+                props.history.push(`/blog/${user.userData.userId}/${contentInfo._id}`)
             }else{
                alert("수정에 실패했습니다.")
             }
@@ -141,7 +141,7 @@ function EditPage(props) {
                     
                     <div style={{display:'flex' ,justifyContent:'center'}}>
                         <Button onClick = {editHandler}  style={{marginRight:'10px'}}>수정</Button>
-                        <Button onClick = {()=> { props.history.push(`/blog/${props.user.userData.id}`)}}>취소</Button>
+                        <Button onClick = {()=> { props.history.push(`/blog/${props.user.userData.userId}`)}}>취소</Button>
                     </div>   
             </div>
    

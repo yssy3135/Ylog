@@ -25,8 +25,9 @@ function DetailContentsPage(props) {
         
 
     }, [])
-    
-    
+
+
+     
 
     const getContent = () => {
         let body = {
@@ -37,12 +38,14 @@ function DetailContentsPage(props) {
         .then(response => {
             if(response.data.success){
 
-                let ymd = response.data.contentsInfo[0].createdAt.substring(0,10)
-                let hmc = response.data.contentsInfo[0].createdAt.substring(11,19)
+                let ymd = response.data.contentsInfo[0].updatedAt.substring(0,10)
+                let hmc = response.data.contentsInfo[0].updatedAt.substring(11,19)
+
+
 
 
                 
-                response.data.contentsInfo[0].createdAt = ymd+" "+hmc
+                response.data.contentsInfo[0].updatedAt = ymd+" "+hmc
                 setcontentsInfo(response.data.contentsInfo[0])
                 setcategoryInfo(response.data.contentsInfo[0].category)
                 setwriteInfo(response.data.contentsInfo[0].writer);
@@ -118,7 +121,7 @@ function DetailContentsPage(props) {
                                 alignItems:'center',
                                 fontSize: '1rem',
                                 justifyContent: 'flex-end'
-                    }}>{contentsInfo.createdAt}</div> 
+                    }}>{ contentsInfo.updatedAt}</div> 
                     <div id = "viewer" style= {{     
                         overflowY: 'hidden',
                         paddingLeft: '10px',
@@ -175,7 +178,7 @@ function DetailContentsPage(props) {
                                 paddingBottom : '20px',
                                 fontSize: 'large',
                                 justifyContent: 'flex-end'
-                    }} >{contentsInfo.createdAt}</div> 
+                    }} >{contentsInfo.updatedAt}</div> 
     
                         
     

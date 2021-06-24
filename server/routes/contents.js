@@ -5,6 +5,19 @@ const { Contents } = require("../models/Contents")
 
 
 
+function getCurrentDate(){
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth();
+    var today = date.getDay();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var milliseconds = date.getMilliseconds();
+    return new Date(Date.UTC(year, month, today, hours, minutes, seconds, milliseconds));
+}
+
+
 
 var storage = multer.diskStorage({
     destination: function(req,file,cb){
@@ -31,7 +44,8 @@ router.post('/image',(req,res) => {
 
 
 router.post("/write",(req,res) => {
-   
+    req.body.createdAt = getCurrentDate();
+    req.body.updatedAt = getCurrentDate();
     const content = new Contents(req.body);
    
     
@@ -97,8 +111,7 @@ router.post("/content",(req,res) => {
 
 
 router.post("/detail",(req,res) => {
-        console.log(req.body.contentId)
-    
+
         Contents.find()
         .where('_id').equals(req.body.contentId)
         .populate("writer")
@@ -122,6 +135,7 @@ router.post("/detail",(req,res) => {
 router.post("/edit",(req,res) => {
 
     let body = req.body
+    req.body.updatedAt = getCurrentDate();
     
     Contents.findOneAndUpdate(
         {_id : body.contentsId},
